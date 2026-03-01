@@ -49,7 +49,7 @@ const bookSlice = createSlice({
         existingBook.category = category;
         existingBook.inStock = inStock;
       }
-    }
+    },
   }
 })
 
