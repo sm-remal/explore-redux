@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addBook } from '../../features/books/bookSlice';
 
 const BookForm = () => {
+    const dispatch = useDispatch();
+
     const [formData, setFormData] = useState({
         title: '',
         author: '',
@@ -19,7 +23,22 @@ const BookForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData); // replace with your addBook logic
+        const newBook = {
+            ...formData,
+            id: Date.now(),
+            price: Number(formData.price)
+        }
+
+        dispatch(addBook(newBook));
+
+        setFormData({
+            title: '',
+            author: '',
+            category: '',
+            price: '',
+            inStock: true,
+        });
+
     };
 
     return (
