@@ -1,0 +1,1 @@
+// console.log(" npx json-server -p 5000 -w database/db.json ") 
