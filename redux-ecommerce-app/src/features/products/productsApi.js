@@ -16,6 +16,5 @@ export const deleteProduct = createAsyncThunk("products/deleteProduct", async (i
 
 export const addProduct = createAsyncThunk("products/addProduct", async (product) => {
     const response = await axios.post(`http://localhost:5000/products`, product);
-    console.log(response);
     return response;
 })

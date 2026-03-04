@@ -1,4 +1,5 @@
 import './App.css'
+import AddProduct from './components/ProductsList/AddProduct'
 import ProductsList from './components/ProductsList/ProductsList'
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
             <div className="hidden md:flex space-x-8 text-sm font-medium text-gray-600">
               <a href="#" className="hover:text-indigo-600 transition-colors">Collections</a>
               <a href="#" className="hover:text-indigo-600 transition-colors">New Arrivals</a>
-              <a href="#" className="hover:text-indigo-600 transition-colors">Offers</a>
+              <a href="#" className="hover:text-indigo-600 transition-colors">Add Product</a>
             </div>
 
             <div className="flex items-center gap-4">
@@ -55,6 +56,7 @@ function App() {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto pb-20">
         <ProductsList />
+        <AddProduct />
       </main>
 
       {/* Footer */}

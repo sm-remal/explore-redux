@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { deleteProduct, fetchProducts } from "./productsApi";
+import { addProduct, deleteProduct, fetchProducts } from "./productsApi";
+// import AddProduct from "../../components/ProductsList/AddProduct";
 
 const initialState = {
     products: [],
@@ -33,6 +34,11 @@ const productsSlice = createSlice({
         // Delete Product
         builder.addCase(deleteProduct.fulfilled, (status, action) => {
             status.products = status.products.filter((product) => product.id !== action.payload);
+        })
+
+        // Add Product
+        builder.addCase(addProduct.fulfilled, (status, action) => {
+            status.products.push(action.payload)
         })
     }
 })
