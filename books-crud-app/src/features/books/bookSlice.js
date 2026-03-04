@@ -43,7 +43,7 @@ const bookSlice = createSlice({
       const { id, title, author, price, category, inStock } = action.payload
       const existingBook = state.books.find(book => book.id === id);
       if (existingBook) {
-        existingBook.title = title;
+        existingBook.title = title; 
         existingBook.author = author;
         existingBook.price = price;
         existingBook.category = category;

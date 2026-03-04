@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProducts } from '../../features/products/productsApi';
+import { deleteProduct, fetchProducts } from '../../features/products/productsApi';
 
 const ProductsList = () => {
     const { products, isLoading, isError, error } = useSelector(state => state.products);
@@ -9,6 +9,14 @@ const ProductsList = () => {
     useEffect(() => {
         dispatch(fetchProducts())
     }, [dispatch])
+
+    // Delete Product
+    const handleDelete = (id) => {
+        dispatch(deleteProduct(id))
+    }
+
+
+
 
     if (isLoading) {
         return <div className="flex items-center justify-center h-64">
@@ -97,6 +105,7 @@ const ProductsList = () => {
                         >
                             {product.isAvailable ? 'Add to Cart' : 'Unavailable'}
                         </button>
+                        <button onClick={() => handleDelete(product.id)}>Delete</button>
                     </div>
                 ))}
             </div>

@@ -7,3 +7,15 @@ export const fetchProducts = createAsyncThunk("products/fetchProducts", async ()
     const response = await axios.get("http://localhost:5000/products");
     return response.data;
 } )
+
+export const deleteProduct = createAsyncThunk("products/deleteProduct", async (id) => {
+    const response = await axios.delete(`http://localhost:5000/products/${id}`);
+    console.log(response);
+    return id;
+})
+
+export const addProduct = createAsyncThunk("products/addProduct", async (product) => {
+    const response = await axios.post(`http://localhost:5000/products`, product);
+    console.log(response);
+    return response;
+})

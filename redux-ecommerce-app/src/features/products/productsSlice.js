@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchProducts } from "./productsApi";
+import { deleteProduct, fetchProducts } from "./productsApi";
 
 const initialState = {
     products: [],
@@ -20,7 +20,7 @@ const productsSlice = createSlice({
         })
         builder.addCase(fetchProducts.fulfilled, (status, action) => {
             status.isLoading = false;
-            status.products = action.payload;
+            status.products = action.payload; 
             status.isError = false;
             status.error = null;
         })
@@ -28,6 +28,11 @@ const productsSlice = createSlice({
             status.isLoading = false;
             status.isError = true;
             status.error = "Failed to data fetch" | action.error;
+        })
+
+        // Delete Product
+        builder.addCase(deleteProduct.fulfilled, (status, action) => {
+            status.products = status.products.filter((product) => product.id !== action.payload);
         })
     }
 })
