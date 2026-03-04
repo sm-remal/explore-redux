@@ -44,6 +44,7 @@ const AddProduct = () => {
 
     alert("Product add successfully");
 
+    // Reset From
     setFormData({
       id: '', name: '', brand: '', category: '', price: '', rating: '', stock: '', isAvailable: true
     });
