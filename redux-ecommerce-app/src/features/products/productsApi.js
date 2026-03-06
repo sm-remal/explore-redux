@@ -10,17 +10,17 @@ export const fetchProducts = createAsyncThunk("products/fetchProducts", async ()
 
 export const deleteProduct = createAsyncThunk("products/deleteProduct", async (id) => {
     const response = await axios.delete(`http://localhost:5000/products/${id}`);
-    console.log(response);
+    console.log(response.data);
     return id;
 })
 
 export const addProduct = createAsyncThunk("products/addProduct", async (product) => {
     const response = await axios.post(`http://localhost:5000/products`, product);
-    return response;
+    return response.data;
 })
 
-export const updateProduct = createAsyncThunk("products/updateProduct", async (id) => {
-    const response = await axios.post(`http://localhost:5000/products/${id}`);
+export const updateProduct = createAsyncThunk("products/updateProduct", async ({id, product}) => {
+    const response = await axios.patch(`http://localhost:5000/products/${id}`, product);
     console.log(response);
-    return id;
+    return response.data;
 })

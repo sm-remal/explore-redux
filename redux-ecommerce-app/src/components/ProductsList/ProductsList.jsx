@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteProduct, fetchProducts } from '../../features/products/productsApi';
+import { deleteProduct, fetchProducts, updateProduct } from '../../features/products/productsApi';
 
 const ProductsList = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
+    console.log(selectedProduct)
 
     const { products, isLoading, isError, error } = useSelector(state => state.products);
     const dispatch = useDispatch()
@@ -24,6 +25,23 @@ const ProductsList = () => {
         setIsModalOpen(true);
     };
 
+    const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const updatedData = {
+        name: e.target[0].value,
+        price: Number(e.target[1].value),
+        stock: Number(e.target[2].value),
+    };
+
+    dispatch(updateProduct({
+        id: selectedProduct.id,
+        product: updatedData
+    }));
+
+    setIsModalOpen(false);
+};
+
 
 
     if (isLoading) {
@@ -42,7 +60,7 @@ const ProductsList = () => {
             <p className="text-red-600 mt-2">{error}</p>
         </div>
     }
-    if (!isLoading && products.length < 0) {
+    if (!isLoading && products.length === 0) {
         return (<div className="flex flex-col items-center justify-center h-64 bg-gray-50 rounded-xl border border-dashed border-gray-300 mx-4">
             <span className="text-4xl mb-3">📭</span>
             <p className="text-gray-500 text-lg font-medium">No products available right now.</p>
@@ -128,10 +146,22 @@ const ProductsList = () => {
                     <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
                         <div className="bg-white rounded-xl w-[400px] p-6 shadow-lg">
                             <h2 className="text-xl font-bold mb-4">Update Product</h2>
-                            <form className="space-y-4">
+                            <form onSubmit={handleSubmit} className="space-y-4">
                                 <input
                                     type="text"
                                     defaultValue={selectedProduct?.name}
+                                    className="w-full border p-2 rounded"
+                                    placeholder="Product Name"
+                                />
+                                <input
+                                    type="text"
+                                    defaultValue={selectedProduct?.category}
+                                    className="w-full border p-2 rounded"
+                                    placeholder="Product Name"
+                                />
+                                <input
+                                    type="text"
+                                    defaultValue={selectedProduct?.brand}
                                     className="w-full border p-2 rounded"
                                     placeholder="Product Name"
                                 />
@@ -156,6 +186,7 @@ const ProductsList = () => {
                                         Cancel
                                     </button>
                                     <button
+                                        // {() => handleUpdate()}
                                         type="submit"
                                         className="px-4 py-2 bg-indigo-600 text-white rounded"
                                     >

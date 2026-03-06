@@ -21,7 +21,7 @@ const productsSlice = createSlice({
         })
         builder.addCase(fetchProducts.fulfilled, (status, action) => {
             status.isLoading = false;
-            status.products = action.payload; 
+            status.products = action.payload;
             status.isError = false;
             status.error = null;
         })
@@ -42,9 +42,21 @@ const productsSlice = createSlice({
         })
 
         // Update Product
-        builder.addCase(updateProduct.fulfilled, (status, action) => {
-            status.products = status.products.find(product => product.id === action.payload)
-        })
+        builder.addCase(updateProduct.fulfilled, (state, action) => {
+
+            const product = state.products.find(
+                product => product.id === action.payload.id
+            );
+
+            if (product) {
+                product.name = action.payload.name;
+                product.price = action.payload.price;
+                product.stock = action.payload.stock;
+                product.stock = action.payload.category;
+                product.stock = action.payload.brand;
+            }
+
+        });
     }
 })
 
