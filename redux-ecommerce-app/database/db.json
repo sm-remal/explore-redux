@@ -69,6 +69,16 @@
       "rating": 3,
       "stock": 900,
       "isAvailable": true
+    },
+    {
+      "id": "16",
+      "name": "Rina Sellers",
+      "brand": "Dolore voluptatem i",
+      "category": "Voluptas excepturi c",
+      "price": 514,
+      "rating": 4,
+      "stock": 467,
+      "isAvailable": true
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

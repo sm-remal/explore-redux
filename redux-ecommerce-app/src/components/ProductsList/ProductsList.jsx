@@ -1,8 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteProduct, fetchProducts } from '../../features/products/productsApi';
 
 const ProductsList = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedProduct, setSelectedProduct] = useState(null);
+
     const { products, isLoading, isError, error } = useSelector(state => state.products);
     const dispatch = useDispatch()
 
@@ -15,6 +18,11 @@ const ProductsList = () => {
         dispatch(deleteProduct(id))
     }
 
+    // Update Product
+    const handleUpdate = (product) => {
+        setSelectedProduct(product);
+        setIsModalOpen(true);
+    };
 
 
 
@@ -105,11 +113,62 @@ const ProductsList = () => {
                         >
                             {product.isAvailable ? 'Add to Cart' : 'Unavailable'}
                         </button>
+
+                        {/* Delete Button  */}
                         <button onClick={() => handleDelete(product.id)}>Delete</button>
+
+                        {/* Update Button*/}
+                        <button onClick={() => handleUpdate(product)}>Update</button>
                     </div>
                 ))}
             </div>
+
+            {
+                isModalOpen && (
+                    <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+                        <div className="bg-white rounded-xl w-[400px] p-6 shadow-lg">
+                            <h2 className="text-xl font-bold mb-4">Update Product</h2>
+                            <form className="space-y-4">
+                                <input
+                                    type="text"
+                                    defaultValue={selectedProduct?.name}
+                                    className="w-full border p-2 rounded"
+                                    placeholder="Product Name"
+                                />
+                                <input
+                                    type="number"
+                                    defaultValue={selectedProduct?.price}
+                                    className="w-full border p-2 rounded"
+                                    placeholder="Price"
+                                />
+                                <input
+                                    type="number"
+                                    defaultValue={selectedProduct?.stock}
+                                    className="w-full border p-2 rounded"
+                                    placeholder="Stock"
+                                />
+                                <div className="flex justify-end gap-3 mt-4">
+                                    <button
+                                        type="button"
+                                        onClick={() => setIsModalOpen(false)}
+                                        className="px-4 py-2 bg-gray-200 rounded"
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button
+                                        type="submit"
+                                        className="px-4 py-2 bg-indigo-600 text-white rounded"
+                                    >
+                                        Update
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                )
+            }
         </div>
+
     );
 };
 

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addProduct, deleteProduct, fetchProducts } from "./productsApi";
+import { addProduct, deleteProduct, fetchProducts, updateProduct } from "./productsApi";
 // import AddProduct from "../../components/ProductsList/AddProduct";
 
 const initialState = {
@@ -39,6 +39,11 @@ const productsSlice = createSlice({
         // Add Product
         builder.addCase(addProduct.fulfilled, (status, action) => {
             status.products.push(action.payload)
+        })
+
+        // Update Product
+        builder.addCase(updateProduct.fulfilled, (status, action) => {
+            status.products = status.products.find(product => product.id === action.payload)
         })
     }
 })
