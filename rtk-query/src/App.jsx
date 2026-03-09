@@ -1,7 +1,7 @@
 function App() {
   return (
     <div>
-      Redux Toolkit Query
+      
     </div>
   )
 }
