@@ -1,8 +1,13 @@
 import React from "react";
-import { useGetProductsQuery } from "../../services/productsApi";
+import { useDeleteProductMutation, useGetProductsQuery } from "../../services/productsApi";
 
 const ProductsList = () => {
   const { data, isLoading, isError, error } = useGetProductsQuery();
+  const [ deleteProduct ] = useDeleteProductMutation()
+
+const handleDelete = async (id) => {
+    await deleteProduct(id)
+}
 
   if (isLoading) {
     return (
@@ -63,6 +68,11 @@ const ProductsList = () => {
 
               <button className="w-full mt-3 bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition">
                 Add to Cart
+              </button>
+              <button 
+              onClick={() => handleDelete(product.id)}
+              className="w-full mt-3 bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition">
+                Delete
               </button>
             </div>
           </div>

@@ -9,7 +9,7 @@ export const productsApi = createApi({
       query: () => '/products',
     }),
 
-    deleteProducts: builder.query({
+    deleteProduct: builder.mutation({
       query: (id) => ({
         url: `/products/${id}`,
         method: "DELETE",
@@ -18,4 +18,4 @@ export const productsApi = createApi({
   }),
 })
 
-export const { useGetProductsQuery, useDeleteProductsQuery } = productsApi;
+export const { useGetProductsQuery, useDeleteProductMutation } = productsApi;
