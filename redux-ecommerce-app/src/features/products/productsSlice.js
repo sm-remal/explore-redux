@@ -28,7 +28,7 @@ const productsSlice = createSlice({
         builder.addCase(fetchProducts.rejected, (status, action) => {
             status.isLoading = false;
             status.isError = true;
-            status.error = "Failed to data fetch" | action.error;
+            status.error = action.error || "Failed to data fetch";
         })
 
         // Delete Product
