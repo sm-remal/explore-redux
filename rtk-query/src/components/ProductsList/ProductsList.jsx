@@ -82,4 +82,4 @@ const handleDelete = async (id) => {
   );
 };
 
-export default ProductsList;
+export default ProductsList; 
