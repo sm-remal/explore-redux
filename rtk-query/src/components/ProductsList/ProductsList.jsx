@@ -70,6 +70,7 @@ const handleDelete = async (id) => {
                 Add to Cart
               </button>
               <button 
+              type="button"
               onClick={() => handleDelete(product.id)}
               className="w-full mt-3 bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition">
                 Delete
