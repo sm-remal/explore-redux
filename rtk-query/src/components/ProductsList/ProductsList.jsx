@@ -9,7 +9,7 @@ const handleDelete = async (id) => {
     await deleteProduct(id)
 }
 
-  if (isLoading) {
+  if (isLoading) { 
     return (
       <div className="flex justify-center items-center h-screen text-xl font-semibold">
         Loading products...
@@ -62,7 +62,7 @@ const handleDelete = async (id) => {
                 </span>
 
                 <span className="text-yellow-500 text-sm">
-                  ⭐ {product.rating.rate}
+                  ⭐ {product?.rating?.rate}
                 </span>
               </div>
 

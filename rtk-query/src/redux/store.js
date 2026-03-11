@@ -12,4 +12,4 @@ export const store = configureStore({
         getDefaultMiddleware().concat(productsApi.middleware),
 })
 // Refetch
-setupListeners(store.dispatch) 
+setupListeners(store.dispatch)  
